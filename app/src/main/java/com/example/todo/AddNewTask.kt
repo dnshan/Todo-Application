@@ -39,28 +39,28 @@ class AddNewTask : BottomSheetDialogFragment() {
         if (bundle != null) {
             isUpdate = true
             val task = bundle.getString("task")
-            mEditText.setText(task)
+            mEditText?.setText(task)
             if (task!!.length > 0) {
-                mSaveButton.setEnabled(false)
+                mSaveButton?.setEnabled(false)
             }
         }
-        mEditText.addTextChangedListener(object : TextWatcher {
+        mEditText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString() == "") {
-                    mSaveButton.setEnabled(false)
-                    mSaveButton.setBackgroundColor(Color.GRAY)
+                    mSaveButton?.setEnabled(false)
+                    mSaveButton?.setBackgroundColor(Color.GRAY)
                 } else {
-                    mSaveButton.setEnabled(true)
-                    mSaveButton.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                    mSaveButton?.setEnabled(true)
+                    mSaveButton?.setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 }
             }
 
             override fun afterTextChanged(s: Editable) {}
         })
         val finalIsUpdate = isUpdate
-        mSaveButton.setOnClickListener(View.OnClickListener {
-            val text = mEditText.getText().toString()
+        mSaveButton?.setOnClickListener(View.OnClickListener {
+            val text = mEditText?.getText().toString()
             if (finalIsUpdate) {
                 myDb!!.updateTask(bundle!!.getInt("id"), text)
             } else {
@@ -77,7 +77,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         super.onDismiss(dialog)
         val activity: Activity? = activity
         if (activity is OnDialogCloseListner) {
-            (activity as OnDialogCloseListner?).onDialogClose(dialog)
+            (activity as? OnDialogCloseListner)?.onDialogClose(dialog)
         }
     }
 

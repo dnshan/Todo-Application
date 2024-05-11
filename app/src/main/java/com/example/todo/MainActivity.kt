@@ -28,23 +28,24 @@ class MainActivity : AppCompatActivity(), OnDialogCloseListner {
         myDB = DataBaseHelper(this@MainActivity)
         mList = ArrayList()
         adapter = ToDoAdapter(myDB, this@MainActivity)
-        mRecyclerview.setHasFixedSize(true)
-        mRecyclerview.setLayoutManager(LinearLayoutManager(this))
-        mRecyclerview.setAdapter(adapter)
+        mRecyclerview?.setHasFixedSize(true)
+        mRecyclerview?.setLayoutManager(LinearLayoutManager(this))
+        mRecyclerview?.setAdapter(adapter)
         mList = myDB!!.allTasks
         Collections.reverse(mList)
-        adapter.setTasks(mList)
-        fab.setOnClickListener(View.OnClickListener {
+        adapter?.setTasks(mList)
+        fab?.setOnClickListener(View.OnClickListener {
             AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG)
         })
         val itemTouchHelper = ItemTouchHelper(RecyclerViewTouchHelper(adapter))
         itemTouchHelper.attachToRecyclerView(mRecyclerview)
     }
 
-    fun onDialogClose(dialogInterface: DialogInterface?) {
+    override fun onDialogClose(dialogInterface: DialogInterface?) {
         mList = myDB!!.allTasks
         Collections.reverse(mList)
-        adapter.setTasks(mList)
-        adapter.notifyDataSetChanged()
+        adapter?.setTasks(mList)
+        adapter?.notifyDataSetChanged()
     }
+
 }

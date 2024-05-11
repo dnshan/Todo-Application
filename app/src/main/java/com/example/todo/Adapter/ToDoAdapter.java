@@ -89,7 +89,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
     }
     @Override
     public int getItemCount() {
-        return 0;
+        return mList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
